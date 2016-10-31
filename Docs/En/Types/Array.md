@@ -281,8 +281,8 @@ Associate array values with keys
 if `keys` is `Array` it used as keys names, and array used as values
 if `keys` if `Function` it used as function, generated values & array used as keys
 
-	atom.array.accociate([1,2,3], ['a','b','c']); // {a:1,b:2,c:3}
-	atom.array.accociate([1,2,3], function (item) {
+	atom.array.associate([1,2,3], ['a','b','c']); // {a:1,b:2,c:3}
+	atom.array.associate([1,2,3], function (item) {
 		return item * 2;
 	}); // {1:2,2:4,3:6}
 
