@@ -1114,8 +1114,12 @@ atom.cookie = {
 
 		return atom.cookie;
 	},
-	del: function (name) {
-		return atom.cookie.set(name, '', { expires: -1 });
+	del: function (name, options) {
+		if(!options){
+          return atom.cookie.set(name, '', { expires: -1 });
+        }else{
+          return atom.cookie.set(name, '', { path: options.path, expires: -1 });
+        }
 	}
 };
 
@@ -4109,7 +4113,7 @@ atom.array = {
 	fillMatrix: function (width, height, fill) {
 		var array = new Array(height);
 		while (height--) {
-			array[height] = Array.fill(width, fill);
+			array[height] = atom.array.fill(width, fill);
 		}
 		return array;
 	},
