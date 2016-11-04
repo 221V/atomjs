@@ -48,12 +48,6 @@ Checks if string begins with substring
 	atom.string.begins( 'Hello, World!', 'Hello' ); // true
 	atom.string.begins( 'Hello, World!', 'World' ); // false
 	
-#### begins
-Checks if string begins with substring
-
-	atom.string.begins( 'Hello, World!', 'Hello' ); // true
-	atom.string.begins( 'Hello, World!', 'World' ); // false
-	
 #### ends
 Checks if string ends with substring
 
