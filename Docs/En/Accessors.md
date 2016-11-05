@@ -21,8 +21,8 @@ Defines setter or getter of `object` with name `prop`
 	var object = {};
 
 	atom.accessors.define(object, 'foo', {
-		set: function (value) { console.log('object.foo Setter'); )
-		get: function ()      { console.log('object.foo Getter'); )
+		set: function (value) { console.log('object.foo Setter'); },
+		get: function ()      { console.log('object.foo Getter'); }
 	});
 
 	object.foo = 123; // object.foo Setter
@@ -34,9 +34,8 @@ Get accessors from `object` with name `prop`
 
 #### Examples:
 	var object = {
-		set foo(value) { console.log('object.foo Setter'); ),
-		get foo()      { console.log('object.foo Getter'); ),
-
+		set foo(value) { console.log('object.foo Setter'); },
+		get foo()      { console.log('object.foo Getter'); },
 		bar: 123
 	};
 	
