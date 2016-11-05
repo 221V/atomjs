@@ -7,7 +7,7 @@ Checks if `object` has getter or setter for property `prop` as own property, or 
 
 #### Example:
 	var object = {
-		set foo () {}
+		set foo (ff) {return ff;}
 	};
 
 	atom.accessors.has(object, 'foo'); // true
