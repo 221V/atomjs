@@ -5,7 +5,7 @@ Wrapper for native prototype-based OOP
 ### Base class creating
 	var NameLogger = atom.Class({
 		log : function (msg) {
-			atom.log(this.name, msg);
+			console.log(this.name, msg);
 			return this;
 		}
 	});
@@ -129,11 +129,11 @@ Available some methods helpers:
 		abstr: atom.Class.abstractMethod,
 
 		initialize: atom.Class.hiddenMethod(function () {
-			atom.log('initilize will not be implemented by children (hidden)');
+			console.log('initilize will not be implemented by children (hidden)');
 		}),
 
 		prot: atom.Class.protectedMethod(function() {
-			atom.log('this is protected method');
+			console.log('this is protected method');
 		})
 	});
 
@@ -152,7 +152,7 @@ You can use accessors!
 
 	var foo = new Foo;
 	foo.bar = 21;
-	log(foo.bar); // 'Foo.bar: 42'
+	console.log(foo.bar); // 'Foo.bar: 42'
 
 ### Expanding prototype, no reset
 Unlike the MooTools we dont reset each object. So the objects are links in prototype:
@@ -168,8 +168,8 @@ Unlike the MooTools we dont reset each object. So the objects are links in proto
 	var small = new MyClass(100, 100);
 	var big   = new MyClass(555, 555);
 
-	atom.log(small.settings. == big.settings); // true
-	atom.log(small.settings.width, small.settings.height); // (555, 555)
+	console.log(small.settings == big.settings); // true
+	console.log(small.settings.width, small.settings.height); // (555, 555)
 
 So, use constructor object creating instead:
 
@@ -184,8 +184,8 @@ So, use constructor object creating instead:
 	var small = new MyClass(100, 100);
 	var big   = new MyClass(555, 555);
 
-	atom.log(small.settings. == big.settings); // false
-	atom.log(small.settings.width, small.settings.height); // (100, 100), as expected
+	console.log(small.settings == big.settings); // false
+	console.log(small.settings.width, small.settings.height); // (100, 100), as expected
 
 # Default Mutators
 
@@ -199,8 +199,8 @@ Let you to add static properties:
 		}
 	});
 
-	atom.log(MyClass.staticProperty); // 15
-	atom.log(MyClass.staticMethod()); // 88
+	console.log(MyClass.staticProperty); // 15
+	console.log(MyClass.staticMethod()); // 88
 
 ### Extends
 Let you to extends one class from another. You can call `parent` to access method with same name of parent class.
@@ -208,13 +208,13 @@ Unlimited nesting is available. Accessors are implemented, but you can't call `p
 
 	var Foo = atom.Class({
 		initialize: function () {
-			log('Foo.initialize');
+			console.log('Foo.initialize');
 		},
 		fooMethod: function () {
-			log('Foo.fooMethod');
+			console.log('Foo.fooMethod');
 		},
 		genMethod: function (arg) {
-			log('genMethod: ' + arg);
+			console.log('genMethod: ' + arg);
 		},
 		get accessor () {
 			return 100;
@@ -225,7 +225,7 @@ Unlimited nesting is available. Accessors are implemented, but you can't call `p
 		Extends: Foo,
 		initialize: function () {
 			this.parent(); // 'Foo.initialize'
-			log('Bar.initialize');
+			console.log('Bar.initialize');
 			this.fooMethod(); // 'Foo.fooMethod'
 		},
 		genMethod: function () {
@@ -238,7 +238,7 @@ Unlimited nesting is available. Accessors are implemented, but you can't call `p
 		Extends: Bar,
 		initialize: function () {
 			this.parent(); // 'Foo.initialize', 'Bar.initialize'
-			log('Qux.initialize');
+			console.log('Qux.initialize');
 		},
 		get accessor () {
 			return this.parent() + 1; // Error
@@ -248,30 +248,32 @@ Unlimited nesting is available. Accessors are implemented, but you can't call `p
 	var foo = new Foo();
 	var qux = new Qux();
 
-	foo instanceof Foo; // true
-	foo instanceof Qux; // false
+    console.log(
+	foo instanceof Foo, // true
+	foo instanceof Qux, // false
 
-	qux instanceof Foo; // true
-	qux instanceof Qux; // true
+	qux instanceof Foo, // true
+	qux instanceof Qux // true
+    );
 
 ### Implements
 Let you mixin properties from some classes. You can't access mixin properties using "parent"
 
 	Bar = atom.Class({
 		barMethod: function () {
-			log('Bar.barMethod');
+			console.log('Bar.barMethod');
 		}
 	});
 	Qux = atom.Class({
 		quxMethod: function () {
-			log('Qux.quxMethod');
+			console.log('Qux.quxMethod');
 		}
 	});
 
 	Foo = atom.Class({
 		Implements: [ Bar, Qux ],
 		fooMethod: function () {
-			log('Foo.fooMethod');
+			console.log('Foo.fooMethod');
 			this.quxMethod(); // 'Qux.quxMethod'
 		},
 		barMethod: function () {
@@ -280,7 +282,9 @@ Let you mixin properties from some classes. You can't access mixin properties us
 	});
 
 	var foo = new Foo;
-	foo instanceof Foo; // true
-	foo instanceof Bar; // false
-	foo instanceof Qux; // false
+	console.log(
+    foo instanceof Foo, // true
+	foo instanceof Bar, // false
+	foo instanceof Qux // false
+    );
 
